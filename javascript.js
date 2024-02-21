@@ -12,16 +12,19 @@ function getComputerChoice () {
     if (randomNo === 3) return "scissors";
 }
 
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
-console.log(getComputerChoice());
+function playRound(userSelection, computerSelection) {
+    userSelection = userSelection.toLowerCase();
+    if (userSelection === "rock" && computerSelection === "rock") return "draw, rock doesn't beat rock";
+    else if (userSelection === "rock" && computerSelection === "paper") return "lost, paper beats rock";
+    else if (userSelection === "rock" && computerSelection === "scissors") return "won, rock beats scissors";
+
+    else if (userSelection === "paper" && computerSelection === "rock") return "won, paper beats rock";
+    else if (userSelection === "paper" && computerSelection === "paper") return "draw, paper doesn't beat paper";
+    else if (userSelection === "paper" && computerSelection === "scissors") return "lost, scissors beats paper";
+
+    else if (userSelection === "scissors" && computerSelection === "rock") return "lost, rock beats scissors";
+    else if (userSelection === "scissors" && computerSelection === "paper") return "won, scissors beats paper";
+    else if (userSelection === "scissors" && computerSelection === "scissors") return "draw, scissors doesn't beat scissors";
+
+    else return undefined;
+}

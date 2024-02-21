@@ -30,7 +30,7 @@ function playRound(userSelection, computerSelection) {
 }
 
 
-function getUserSelection(){
+function getUserChoice(){
     // infinite loop to get the correct guess from the player 
     while (true){
         //ask user for input
@@ -50,4 +50,28 @@ function getUserSelection(){
     }
 }
 
-console.log(getUserSelection());
+function playGame(gamesNumber = 5) {
+    let roundsWon= 0 ;
+    let roundsLost = 0 ;
+    let draws = 0 ;
+    for (let i = 0; i < gamesNumber; i++){
+        //get user and computer choices
+        userChoice = getUserChoice();
+        computerChoice = getComputerChoice();
+
+        //play a round and print the result
+        let result = playRound(userChoice,computerChoice);
+        console.log(result);
+
+        //result will be either "won," , "lost", or "draw"
+        result = result.slice(0,4)
+
+        //add one to the score if the user won the round
+        if (result === "won,") roundsWon++;
+        else if (result === "lost") roundsLost++;
+        else draws++;
+    }
+    console.log(`wins:${roundsWon}, losses:${roundsLost}, draws:${draws}`);
+}
+
+playGame();

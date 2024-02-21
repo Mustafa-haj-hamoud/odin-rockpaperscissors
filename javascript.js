@@ -50,6 +50,12 @@ function getUserChoice(){
     }
 }
 
+function calculateWinner(wins,losses){
+    if (wins > losses) return "player won";
+    else if (losses > wins) return "computer won";
+    else if (losses === wins) return "it was a draw";
+}
+
 function playGame(gamesNumber = 5) {
     let roundsWon= 0 ;
     let roundsLost = 0 ;
@@ -72,6 +78,7 @@ function playGame(gamesNumber = 5) {
         else draws++;
     }
     console.log(`wins:${roundsWon}, losses:${roundsLost}, draws:${draws}`);
+    console.log(calculateWinner(roundsWon,roundsLost));
 }
 
 playGame();

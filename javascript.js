@@ -29,20 +29,25 @@ function playRound(userSelection, computerSelection) {
     else return undefined;
 }
 
-// infinite loop to get the correct guess from the player 
-while (true){
-    //ask user for input
-    let userGuess = prompt("Enter 'rock' or 'paper' or 'scissors'");
 
-    //make sure the user actually entered something
-    if (!userGuess) {
-        alert("Please choose a value");
-        continue;
+function getUserSelection(){
+    // infinite loop to get the correct guess from the player 
+    while (true){
+        //ask user for input
+        let userGuess = prompt("Enter 'rock' or 'paper' or 'scissors'");
+
+        //make sure the user actually entered something
+        if (!userGuess) {
+            alert("Please choose a value");
+            continue;
+        }
+
+        userGuess = userGuess.toLowerCase();
+
+        // check if user entered a valid response, if so, break out of the loop, otherwise prompt again
+        if (userGuess === "rock" || userGuess === "paper" || userGuess === "scissors") return userGuess;
+        else alert("Invalid choice, try again");
     }
-
-    userGuess = userGuess.toLowerCase();
-
-    // check if user entered a valid response, if so, break out of the loop, otherwise prompt again
-    if (userGuess !== "rock" || userGuess !== "paper" || userGuess !== "scissors") break;
-    else alert("Invalid choice, try again");
 }
+
+console.log(getUserSelection());

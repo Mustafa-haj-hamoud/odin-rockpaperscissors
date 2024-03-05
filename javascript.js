@@ -61,13 +61,12 @@ function playGame(event) {
     gamesPlayed++;
     currentScoreDiv.textContent = `Current Score: ${playerWins} wins, ${draws} draws, ${computerWins} losses.`;
 
-    if (gamesPlayed === 5) {
+    if (playerWins === 5 || computerWins === 5) {
         let winner = calculateWinner(playerWins, computerWins);
         alert(winner);
         resultDiv.textContent = `${winner}, the score was ${playerWins} wins, ${draws} draws, ${computerWins} losses.`;
         resetGame();
     }
-
 }
 
 let gamesPlayed = 0;

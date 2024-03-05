@@ -44,12 +44,24 @@ function playGame(event) {
 
     //play a round and print the result
     let result = playRound(userChoice,computerChoice);
-    console.log(result);
 
     //result will be either "won," , "lost", or "draw"
     const resultDiv = document.querySelector("#result");
+    const currentScoreDiv = document.querySelector("#current-score");
     resultDiv.textContent = result;
+
+    result = result.slice(0, 4);
+    if (result === "won,") playerWins++;
+    else if (result === "lost") computerWins++;
+    else if (result === "draw") draws++;
+
+    currentScoreDiv.textContent = `Current Score: ${playerWins} wins, ${draws} draws, ${computerWins} losses.`;
 }
+
+let gamesPlayed = 0;
+let playerWins = 0;
+let computerWins = 0;
+let draws = 0;
 
 const buttons = document.querySelectorAll("#buttons-div button");
 

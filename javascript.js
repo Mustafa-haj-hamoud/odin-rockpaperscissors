@@ -14,6 +14,7 @@ function getComputerChoice () {
 
 function playRound(userSelection, computerSelection) {
     userSelection = userSelection.toLowerCase();
+
     if (userSelection === "rock" && computerSelection === "rock") return "draw, rock doesn't beat rock";
     else if (userSelection === "rock" && computerSelection === "paper") return "lost, paper beats rock";
     else if (userSelection === "rock" && computerSelection === "scissors") return "won, rock beats scissors";
@@ -29,56 +30,29 @@ function playRound(userSelection, computerSelection) {
     else return undefined;
 }
 
-
-function getUserChoice(){
-    // infinite loop to get the correct guess from the player 
-    while (true){
-        //ask user for input
-        let userGuess = prompt("Enter 'rock' or 'paper' or 'scissors'");
-
-        //make sure the user actually entered something
-        if (!userGuess) {
-            alert("Please choose a value");
-            continue;
-        }
-
-        userGuess = userGuess.toLowerCase();
-
-        // check if user entered a valid response, if so, break out of the loop, otherwise prompt again
-        if (userGuess === "rock" || userGuess === "paper" || userGuess === "scissors") return userGuess;
-        else alert("Invalid choice, try again");
-    }
-}
-
 function calculateWinner(wins,losses){
     if (wins > losses) return "player won";
     else if (losses > wins) return "computer won";
     else if (losses === wins) return "it was a draw";
 }
 
-function playGame(gamesNumber = 5) {
-    let roundsWon= 0 ;
-    let roundsLost = 0 ;
-    let draws = 0 ;
-    for (let i = 0; i < gamesNumber; i++){
-        //get user and computer choices
-        userChoice = getUserChoice();
-        computerChoice = getComputerChoice();
 
-        //play a round and print the result
-        let result = playRound(userChoice,computerChoice);
-        console.log(result);
+function playGame(event) {
+    //get user and computer choices
+    let userChoice = event.target.id;
+    let computerChoice = getComputerChoice();
 
-        //result will be either "won," , "lost", or "draw"
-        result = result.slice(0,4)
+    //play a round and print the result
+    let result = playRound(userChoice,computerChoice);
+    console.log(result);
 
-        //add one to the score if the user won the round
-        if (result === "won,") roundsWon++;
-        else if (result === "lost") roundsLost++;
-        else draws++;
-    }
-    console.log(`wins:${roundsWon}, losses:${roundsLost}, draws:${draws}`);
-    console.log(calculateWinner(roundsWon,roundsLost));
+    //result will be either "won," , "lost", or "draw"
+    const resultDiv = document.querySelector("#result");
+    resultDiv.textContent = result;
 }
 
-playGame();
+const buttons = document.querySelectorAll("#buttons-div button");
+
+buttons.forEach((button) => {
+    button.addEventListener("click",playGame);
+});

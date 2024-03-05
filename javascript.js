@@ -31,9 +31,17 @@ function playRound(userSelection, computerSelection) {
 }
 
 function calculateWinner(wins,losses){
-    if (wins > losses) return "player won";
-    else if (losses > wins) return "computer won";
-    else if (losses === wins) return "it was a draw";
+    if (wins > losses) return "The player won the game";
+    else if (losses > wins) return "The computer won the game";
+    else if (losses === wins) return "The game was a draw";
+}
+
+function resetGame(){
+    gamesPlayed = 0;
+    playerWins = 0;
+    computerWins = 0;
+    draws = 0;
+    currentScoreDiv.textContent = "";
 }
 
 
@@ -44,18 +52,22 @@ function playGame(event) {
 
     //play a round and print the result
     let result = playRound(userChoice,computerChoice);
-
-    //result will be either "won," , "lost", or "draw"
-    const resultDiv = document.querySelector("#result");
-    const currentScoreDiv = document.querySelector("#current-score");
     resultDiv.textContent = result;
 
     result = result.slice(0, 4);
     if (result === "won,") playerWins++;
     else if (result === "lost") computerWins++;
     else if (result === "draw") draws++;
-
+    gamesPlayed++;
     currentScoreDiv.textContent = `Current Score: ${playerWins} wins, ${draws} draws, ${computerWins} losses.`;
+
+    if (gamesPlayed === 5) {
+        let winner = calculateWinner(playerWins, computerWins);
+        alert(winner);
+        resultDiv.textContent = `${winner}, the score was ${playerWins} wins, ${draws} draws, ${computerWins} losses.`;
+        resetGame();
+    }
+
 }
 
 let gamesPlayed = 0;
@@ -63,6 +75,8 @@ let playerWins = 0;
 let computerWins = 0;
 let draws = 0;
 
+const resultDiv = document.querySelector("#result");
+const currentScoreDiv = document.querySelector("#current-score");
 const buttons = document.querySelectorAll("#buttons-div button");
 
 buttons.forEach((button) => {
